@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/test-project-to-do-list/static/css/main.bab75238.chunk.css",
+    "main.js": "/test-project-to-do-list/static/js/main.55cc3f8f.chunk.js",
+    "main.js.map": "/test-project-to-do-list/static/js/main.55cc3f8f.chunk.js.map",
+    "runtime-main.js": "/test-project-to-do-list/static/js/runtime-main.bce4679d.js",
+    "runtime-main.js.map": "/test-project-to-do-list/static/js/runtime-main.bce4679d.js.map",
+    "static/js/2.9c13f64e.chunk.js": "/test-project-to-do-list/static/js/2.9c13f64e.chunk.js",
+    "static/js/2.9c13f64e.chunk.js.map": "/test-project-to-do-list/static/js/2.9c13f64e.chunk.js.map",
+    "static/js/3.56dc5a40.chunk.js": "/test-project-to-do-list/static/js/3.56dc5a40.chunk.js",
+    "static/js/3.56dc5a40.chunk.js.map": "/test-project-to-do-list/static/js/3.56dc5a40.chunk.js.map",
+    "index.html": "/test-project-to-do-list/index.html",
+    "static/css/main.bab75238.chunk.css.map": "/test-project-to-do-list/static/css/main.bab75238.chunk.css.map",
+    "static/js/2.9c13f64e.chunk.js.LICENSE.txt": "/test-project-to-do-list/static/js/2.9c13f64e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bce4679d.js",
+    "static/js/2.9c13f64e.chunk.js",
+    "static/css/main.bab75238.chunk.css",
+    "static/js/main.55cc3f8f.chunk.js"
+  ]
+}
