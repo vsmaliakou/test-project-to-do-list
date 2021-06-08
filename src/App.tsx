@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {ToDoList} from "./ToDoList";
 import {AddItemForm} from "./AddItemForm";
@@ -27,28 +27,28 @@ export const App = () => {
 
     const dispatch = useDispatch()
 
-    const removeTask = (taskId: string, todolistId: string) => {
+    const removeTask = useCallback((taskId: string, todolistId: string) => {
         dispatch(removeTaskAC(taskId, todolistId))
-    }
-    const addTask = (taskTitle: string, todolistId: string) => {
+    }, [])
+    const addTask = useCallback((taskTitle: string, todolistId: string) => {
         dispatch(addTaskAC(taskTitle, todolistId))
-    }
-    const changeTasksStatus = (taskId: string, newIsDone: boolean, todolistId: string) => {
+    }, [])
+    const changeTasksStatus = useCallback((taskId: string, newIsDone: boolean, todolistId: string) => {
         dispatch(changeTasksStatusAC(taskId, newIsDone, todolistId))
-    }
-    const changeTaskTitle = (taskId: string, newTitle: string, todolistId: string) => {
+    }, [])
+    const changeTaskTitle = useCallback((taskId: string, newTitle: string, todolistId: string) => {
         dispatch(changeTasksTitleAC(taskId, newTitle, todolistId))
-    }
+    }, [])
 
-    const removeTodolist = (todolistId: string) => {
+    const removeTodolist = useCallback((todolistId: string) => {
         dispatch(removeTodolistAC(todolistId))
-    }
-    const addTodolist = (title: string) => {
+    }, [])
+    const addTodolist = useCallback((title: string) => {
         dispatch(addTodolistAC(title))
-    }
-    const changeTodolistTitle = (todolistId: string, newTitle: string) => {
+    }, [])
+    const changeTodolistTitle = useCallback((todolistId: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(todolistId, newTitle))
-    }
+    }, [])
 
     return (
         <div className="App">

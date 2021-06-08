@@ -1,7 +1,8 @@
-import React, {ChangeEvent} from "react";
+import React, {useCallback} from "react";
 import {TaskType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import {Task} from "./Task";
 
 
 type ToDoListPropsType = {
@@ -17,11 +18,11 @@ type ToDoListPropsType = {
 }
 
 
-export const ToDoList: React.FC<ToDoListPropsType> = (props) => {
+export const ToDoList: React.FC<ToDoListPropsType> = React.memo((props) => {
 
-    const addTask = (title: string) => props.addTask(title, props.id)
+    const addTask = useCallback((title: string) => props.addTask(title, props.id), [props.addTask, props.id])
     const removeTodolist = () => props.removeTodolist(props.id)
-    const changeTodolistTitle = (newTitle: string) => props.changeTodolistTitle(props.id, newTitle)
+    const changeTodolistTitle = useCallback((newTitle: string) => props.changeTodolistTitle(props.id, newTitle), [props.changeTodolistTitle, props.id])
 
     return (
         <div>
@@ -30,24 +31,17 @@ export const ToDoList: React.FC<ToDoListPropsType> = (props) => {
             <AddItemForm addItem={addTask}/>
             <ul>
                 {
-                    props.tasks.map(t => {
-
-                        const removeTask = () => props.removeTask(t.id, props.id)
-                        const changeTasksStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTasksStatus(t.id, e.currentTarget.checked, props.id)
-                        const changeTaskTitle = (newTitle: string) => props.changeTaskTitle(t.id, newTitle, props.id)
-
-                        return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                            <input
-                                type="checkbox"
-                                checked={t.isDone}
-                                onChange={changeTasksStatus}
-                            />
-                            <EditableSpan title={t.title} onChange={changeTaskTitle}/>
-                            <button onClick={removeTask}>X</button>
-                        </li>
-                    })
+                    props.tasks.map(t => <Task
+                            key={t.id}
+                            task={t}
+                            todolistId={props.id}
+                            removeTask={props.removeTask}
+                            changeTasksStatus={props.changeTasksStatus}
+                            changeTaskTitle={props.changeTaskTitle}
+                        />
+                    )
                 }
             </ul>
         </div>
     )
-}
+})

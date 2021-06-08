@@ -4,7 +4,7 @@ type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
-export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
+export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo((props) => {
 
     const [taskTitle, setTaskTitle] = useState<string>("")
     const [error, setError] = useState<string | null>(null)
@@ -19,8 +19,12 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTaskTitle(e.currentTarget.value)
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
-        e.charCode === 13 && addTask()
+        if (error !== null) {
+            setError(null)
+        }
+        if (e.charCode === 13) {
+            addTask()
+        }
     }
 
     return (
@@ -35,4 +39,4 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
             {error && <div className="error-message">{error}</div>}
         </div>
     )
-}
+})
