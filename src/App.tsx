@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {ToDoList} from "./ToDoList";
 import {v1} from "uuid";
+import {AddItemForm} from "./AddItemForm";
 
 type ToDoListType = {
     id: string
@@ -21,7 +22,7 @@ export const App = () => {
     let todolistId1 = v1()
     let todolistId2 = v1()
 
-    const [todolist, setTodolist] = useState<ToDoListType[]>([
+    const [todolists, setTodolists] = useState<ToDoListType[]>([
         {id: todolistId1, title: "Shopping List"},
         {id: todolistId2, title: "Things To Do"}
     ])
@@ -60,14 +61,21 @@ export const App = () => {
     }
 
     const removeTodolist = (todolistId: string) => {
-        const filteredTodolist = todolist.filter(t => t.id !== todolistId)
-        setTodolist(filteredTodolist)
+        const filteredTodolist = todolists.filter(t => t.id !== todolistId)
+        setTodolists(filteredTodolist)
+    }
+    const addTodolist = (title: string) => {
+        const newTodolistId = v1()
+        const newTodolist = {id: newTodolistId, title}
+        setTodolists([newTodolist, ...todolists])
+        setTasks({...tasks, [newTodolistId]: []})
     }
 
     return (
         <div className="App">
+            <AddItemForm addItem={addTodolist}/>
             {
-                todolist.map(t => {
+                todolists.map(t => {
                     const tasksForTodolist = tasks[t.id]
                     return <ToDoList
                         key={t.id}
