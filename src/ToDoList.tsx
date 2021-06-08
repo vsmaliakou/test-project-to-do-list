@@ -6,19 +6,28 @@ type ToDoListPropsType = {
     tasks: TaskType[]
     removeTask: (taskId: string) => void
     addTask: (taskTitle: string) => void
+    changeTasksStatus: (taskId: string, newIsDone: boolean) => void
 }
 
 
 export const ToDoList: React.FC<ToDoListPropsType> = (props) => {
 
     const [taskTitle, setTaskTitle] = useState<string>("")
+    const [error, setError] = useState<string | null>(null)
 
     const addTask = () => {
-        props.addTask(taskTitle)
-        setTaskTitle("")
+        if(taskTitle.trim() !== ""){
+            props.addTask(taskTitle)
+            setTaskTitle("")
+        } else {
+            setError("Title is required")
+        }
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTaskTitle(e.currentTarget.value)
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => e.charCode === 13 && addTask()
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
+        e.charCode === 13 && addTask()
+    }
 
     return (
         <div>
@@ -28,17 +37,24 @@ export const ToDoList: React.FC<ToDoListPropsType> = (props) => {
                     value={taskTitle}
                     onChange={onChangeHandler}
                     onKeyPress={onKeyPressHandler}
+                    className={error ? "error" : ""}
                 />
                 <button onClick={addTask}>Add task</button>
+                {error && <div className="error-message">{error}</div>}
             </div>
             <ul>
                 {
                     props.tasks.map(t => {
 
                         const removeTask = () => props.removeTask(t.id)
+                        const changeTasksStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTasksStatus(t.id, e.currentTarget.checked)
 
-                        return <li key={t.id}>
-                            <input type="checkbox" checked={t.isDone}/>
+                        return <li key={t.id} className={t.isDone ? "is-done" : ""}>
+                            <input
+                                type="checkbox"
+                                checked={t.isDone}
+                                onChange={changeTasksStatus}
+                            />
                             <span>{t.title}</span>
                             <button onClick={removeTask}>X</button>
                         </li>

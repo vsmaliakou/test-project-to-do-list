@@ -18,13 +18,20 @@ export const App = () => {
     ])
 
     const removeTask = (taskId: string) => {
-        let tasks1 = tasks.filter(t => t.id !== taskId)
+        const tasks1 = tasks.filter(t => t.id !== taskId)
         setTasks(tasks1)
     }
     const addTask = (taskTitle: string) => {
-        let task = {id: v1(), title: taskTitle, isDone: false}
-        let newTasks = [task, ...tasks]
+        const task = {id: v1(), title: taskTitle, isDone: false}
+        const newTasks = [task, ...tasks]
         setTasks(newTasks)
+    }
+    const changeTasksStatus = (taskId: string, newIsDone: boolean) => {
+        const task = tasks.find(t => t.id === taskId)
+        if(task) {
+            task.isDone = newIsDone
+            setTasks([...tasks])
+        }
     }
 
     return (
@@ -34,6 +41,7 @@ export const App = () => {
                 tasks={tasks}
                 removeTask={removeTask}
                 addTask={addTask}
+                changeTasksStatus={changeTasksStatus}
             />
         </div>
     );
