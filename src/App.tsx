@@ -1,24 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {ToDoList} from "./ToDoList";
 
+export type TaskType = {
+    id: number
+    title: string
+    isDone: boolean
+}
+
 export const App = () => {
 
-    const tasks1 = [
+    const [tasks, setTasks] = useState<TaskType[]>([
         {id: 1, title: "Olive oil", isDone: true},
         {id: 2, title: "Canned tomatoes", isDone: true},
         {id: 3, title: "Bathroom cleaner", isDone: false}
-    ]
-    const tasks2 = [
-        {id: 1, title: "Blog post", isDone: true},
-        {id: 2, title: "Edit video", isDone: false},
-        {id: 3, title: "Go to swim", isDone: true}
-    ]
+    ])
+
+    const removeTask = (taskId: number) => {
+        let tasks1 = tasks.filter(t => t.id !== taskId)
+        setTasks(tasks1)
+    }
 
     return (
         <div className="App">
-            <ToDoList title="Shopping List" tasks={tasks1}/>
-            <ToDoList title="Things to do" tasks={tasks2}/>
+            <ToDoList
+                title="Shopping List"
+                tasks={tasks}
+                removeTask={removeTask}
+            />
         </div>
     );
 }
