@@ -4,7 +4,7 @@ import {EditableSpan} from "../Common/EditableSpan";
 import {Task} from "../Task/Task";
 import {useDispatch} from "react-redux";
 import {fetchTaskTC} from "../Task/tasks-reducer";
-import {TaskType} from "../Task/task-api";
+import {TaskStatuses, TaskType} from "../Task/task-api";
 
 
 type ToDoListPropsType = {
@@ -13,7 +13,7 @@ type ToDoListPropsType = {
     tasks: TaskType[]
     removeTask: (taskId: string, todolistId: string) => void
     addTask: (taskTitle: string, todolistId: string) => void
-    changeTasksStatus: (taskId: string, newIsDone: boolean, todolistId: string) => void
+    changeTasksStatus: (taskId: string, status: TaskStatuses, todolistId: string) => void
     removeTodolist: (todolistId: string) => void
     changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
     changeTodolistTitle: (todolistId: string, newTitle: string) => void
