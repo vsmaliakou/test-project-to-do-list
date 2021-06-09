@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback} from "react";
-import {EditableSpan} from "./EditableSpan";
-import {TaskType} from "./App";
+import {EditableSpan} from "../Common/EditableSpan";
+import {TaskStatuses, TaskType} from "./task-api";
 
 type TaskPropsType = {
     task: TaskType
@@ -15,13 +15,13 @@ export const Task: React.FC<TaskPropsType> = (props) => {
     const changeTasksStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTasksStatus(props.task.id, e.currentTarget.checked, props.todolistId)
     const changeTaskTitle = useCallback((newTitle: string) => props.changeTaskTitle(props.task.id, newTitle, props.todolistId), [props.task.id, props.changeTaskTitle, props.todolistId])
 
-    return <li className={props.task.isDone ? "is-done" : ""}>
+    return <div className={props.task.status === TaskStatuses.Completed ? "is-done" : ""}>
         <input
             type="checkbox"
-            checked={props.task.isDone}
+            checked={props.task.status === TaskStatuses.Completed}
             onChange={changeTasksStatus}
         />
         <EditableSpan title={props.task.title} onChange={changeTaskTitle}/>
         <button onClick={removeTask}>X</button>
-    </li>
+    </div>
 }

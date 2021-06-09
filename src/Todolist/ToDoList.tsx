@@ -1,8 +1,10 @@
-import React, {useCallback} from "react";
-import {TaskType} from "./App";
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
-import {Task} from "./Task";
+import React, {useCallback, useEffect} from "react";
+import {AddItemForm} from "../Common/AddItemForm";
+import {EditableSpan} from "../Common/EditableSpan";
+import {Task} from "../Task/Task";
+import {useDispatch} from "react-redux";
+import {fetchTaskTC} from "../Task/tasks-reducer";
+import {TaskType} from "../Task/task-api";
 
 
 type ToDoListPropsType = {
@@ -19,6 +21,12 @@ type ToDoListPropsType = {
 
 
 export const ToDoList: React.FC<ToDoListPropsType> = React.memo((props) => {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchTaskTC(props.id))
+    }, [])
 
     const addTask = useCallback((title: string) => props.addTask(title, props.id), [props.addTask, props.id])
     const removeTodolist = () => props.removeTodolist(props.id)
