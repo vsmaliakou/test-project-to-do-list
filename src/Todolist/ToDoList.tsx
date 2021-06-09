@@ -6,7 +6,6 @@ import {useDispatch} from "react-redux";
 import {fetchTaskTC} from "../Task/tasks-reducer";
 import {TaskStatuses, TaskType} from "../Task/task-api";
 
-
 type ToDoListPropsType = {
     id: string
     title: string
@@ -18,7 +17,6 @@ type ToDoListPropsType = {
     changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
     changeTodolistTitle: (todolistId: string, newTitle: string) => void
 }
-
 
 export const ToDoList: React.FC<ToDoListPropsType> = React.memo((props) => {
 

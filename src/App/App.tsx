@@ -1,20 +1,22 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {ToDoList} from "./Todolist/ToDoList";
-import {AddItemForm} from "./Common/AddItemForm";
+import {ToDoList} from "../Todolist/ToDoList";
+import {AddItemForm} from "../Common/AddItemForm";
 import {
     addTodolistTC,
     changeTodolistTitleTC,
     fetchTodolistsTC,
     removeTodolistTC
-} from "./Todolist/todolists-reducer";
+} from "../Todolist/todolists-reducer";
 import {
     removeTaskTC,
     addTaskTC, updateTaskTC
-} from "./Task/tasks-reducer";
+} from "../Task/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./store";
-import {TaskStatuses, TaskType} from "./Task/task-api";
+import {AppRootStateType} from "../store";
+import {TaskStatuses, TaskType} from "../Task/task-api";
+import {RequestStatusType} from "./app-reducer";
+import {Loading} from "../Common/Loading/Loading";
 
 export type ToDoListType = {
     id: string
@@ -28,6 +30,8 @@ export const App = () => {
 
     const todolists = useSelector<AppRootStateType, Array<ToDoListType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
 
     const dispatch = useDispatch()
 
@@ -60,6 +64,8 @@ export const App = () => {
 
     return (
         <div className="App">
+            {status === "loading" && <Loading/>}
+            {error && <div>{error}</div>}
             <AddItemForm addItem={addTodolist}/>
             {
                 todolists.map(t => {

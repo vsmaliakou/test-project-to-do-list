@@ -1,0 +1,153 @@
+.loadingWrap {
+    width: 100%;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+    background-color: rgba(56, 51, 51, 0.192);
+}
+
+.cssloadDots {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    outline: 1px solid red;
+    filter: url(#goo);
+}
+
+.cssloadDot {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.cssloadDot:before {
+    content: "";
+    width: 44px;
+    height: 44px;
+    border-radius: 63px;
+    background: rgb(251, 211, 1);
+    position: absolute;
+    left: 50%;
+    transform: translateY(0);
+    margin-left: -21.5px;
+    margin-top: -21.5px;
+}
+
+.cssloadDot:nth-child(5):before {
+    z-index: 100;
+    width: 56.5px;
+    height: 56.5px;
+    margin-left: -28.75px;
+    margin-top: -28.75px;
+    animation: cssload-dot-colors 4.6s ease infinite;
+}
+
+.cssloadDot:nth-child(1) {
+    animation: cssload-dot-rotate-1 4.6s 0s linear infinite;
+}
+
+.cssloadDot:nth-child(1):before {
+    background-color: rgb(255, 50, 112);
+    animation: cssload-dot-move 4.6s 0s ease infinite;
+}
+
+.cssloadDot:nth-child(2) {
+    animation: cssload-dot-rotate-2 4.6s 1.15s linear infinite;
+}
+
+.cssloadDot:nth-child(2):before {
+    background-color: rgb(32, 139, 241);
+    animation: cssload-dot-move 4.6s 1.15s ease infinite;
+}
+
+.cssloadDot:nth-child(3) {
+    animation: cssload-dot-rotate-3 4.6s 2.3s linear infinite;
+}
+
+.cssloadDot:nth-child(3):before {
+    background-color: rgb(175, 225, 2);
+    animation: cssload-dot-move 4.6s 2.3s ease infinite;
+}
+
+.cssloadDot:nth-child(4) {
+    animation: cssload-dot-rotate-4 4.6s 3.45s linear infinite;
+}
+
+.cssloadDot:nth-child(4):before {
+    background-color: rgb(251, 211, 1);
+    animation: cssload-dot-move 4.6s 3.45s ease infinite;
+}
+
+@keyframes cssload-dot-move {
+    0% {
+        transform: translateY(0);
+    }
+    18%, 22% {
+        transform: translateY(-88px);
+    }
+    40%, 100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes cssload-dot-colors {
+    0% {
+        background-color: rgb(251, 211, 1);
+    }
+    25% {
+        background-color: rgb(255, 50, 112);
+    }
+    50% {
+        background-color: rgb(32, 139, 241);
+    }
+    75% {
+        background-color: rgb(175, 225, 2);
+    }
+    100% {
+        background-color: rgb(251, 211, 1);
+    }
+}
+
+@keyframes cssload-dot-rotate-1 {
+    0% {
+        transform: rotate(-105deg);
+    }
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+@keyframes cssload-dot-rotate-2 {
+    0% {
+        transform: rotate(165deg);
+    }
+    100% {
+        transform: rotate(540deg);
+    }
+}
+
+@keyframes cssload-dot-rotate-3 {
+    0% {
+        transform: rotate(435deg);
+    }
+    100% {
+        transform: rotate(810deg);
+    }
+}
+
+@keyframes cssload-dot-rotate-4 {
+    0% {
+        transform: rotate(705deg);
+    }
+    100% {
+        transform: rotate(1080deg);
+    }
+}

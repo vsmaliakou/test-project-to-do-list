@@ -11,8 +11,12 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo((props) =>
 
     const addTask = () => {
         if (taskTitle.trim() !== "") {
-            props.addItem(taskTitle)
-            setTaskTitle("")
+            if(taskTitle.length < 20) {
+                props.addItem(taskTitle)
+                setTaskTitle("")
+            } else {
+                setError("No more than 20 characters")
+            }
         } else {
             setError("Title is required")
         }
