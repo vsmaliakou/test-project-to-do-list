@@ -25,11 +25,18 @@ export const Search = () => {
             <input type={'text'}
                    placeholder='Search...'
                    onChange={searchTaskTitle}
-                   onBlur={() => {taskTitle === "" && setDisplay(false)}}
+                   onBlur={() => {
+                       taskTitle === "" && setDisplay(false)
+                   }}
             />
-            {
-                filteredTasks.map(ft => <div className={display ? `${s.search}` : `${s.searchNone}`}>{ft.title}</div>)
-            }
+
+                <div style={{height: '450px', overflowY: "auto"}}>
+                    {
+                        filteredTasks.map(ft => <div
+                            className={display ? `${s.search}` : `${s.searchNone}`}>{ft.title}</div>)
+                    }
+                </div>
+
         </div>
     )
 }

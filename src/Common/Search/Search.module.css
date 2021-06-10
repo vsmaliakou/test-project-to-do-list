@@ -1,6 +1,5 @@
 .searchContainer{
     background-color: #d5d5ff;
-    height: 100vh;
     padding: 20px;
 }
 .searchContainer input{
@@ -14,6 +13,7 @@
 .search {
     display: flex;
     background-color: #fff;
+    padding-left: 10px;
 }
 .searchNone {
     display: none;
