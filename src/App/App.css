@@ -1,17 +1,28 @@
 .App {
     display: flex;
+    flex-direction: column;
 }
 
-.App > div {
-    margin-right: 50px;
+.app-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.app-content{
+    width: 100%;
+    margin: 0 40px;
+    padding: 20px 0;
+}
+
+.app-todolists{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .error {
     border: red 1px solid;
-}
-
-.error-message {
-    color: red;
 }
 
 .is-done {

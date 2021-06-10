@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect} from "react";
-import {AddItemForm} from "../Common/AddItemForm";
-import {EditableSpan} from "../Common/EditableSpan";
+import s from './ToDoList.module.css'
+import {AddItemForm} from "../Common/AddItemForm/AddItemForm";
+import {EditableSpan} from "../Common/EditableSpan/EditableSpan";
 import {Task} from "../Task/Task";
 import {useDispatch} from "react-redux";
 import {fetchTaskTC} from "../Task/tasks-reducer";
@@ -31,10 +32,12 @@ export const ToDoList: React.FC<ToDoListPropsType> = React.memo((props) => {
     const changeTodolistTitle = useCallback((newTitle: string) => props.changeTodolistTitle(props.id, newTitle), [props.changeTodolistTitle, props.id])
 
     return (
-        <div>
-            <EditableSpan title={props.title} onChange={changeTodolistTitle}/>
-            <button onClick={removeTodolist}>X</button>
-            <AddItemForm addItem={addTask}/>
+        <div className={s.todolist}>
+            <div className={s.todolistHeader}>
+                <EditableSpan className={s.title} title={props.title} onChange={changeTodolistTitle}/>
+                <button onClick={removeTodolist}>X</button>
+            </div>
+            <AddItemForm addItem={addTask} placeholder="Task title"/>
             <ul>
                 {
                     props.tasks.map(t => <Task

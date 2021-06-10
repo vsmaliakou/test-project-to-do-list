@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {ToDoList} from "../Todolist/ToDoList";
-import {AddItemForm} from "../Common/AddItemForm";
+import {AddItemForm} from "../Common/AddItemForm/AddItemForm";
 import {
     addTodolistTC,
     changeTodolistTitleTC,
@@ -17,6 +17,8 @@ import {AppRootStateType} from "../store";
 import {TaskStatuses, TaskType} from "../Task/task-api";
 import {RequestStatusType} from "./app-reducer";
 import {Loading} from "../Common/Loading/Loading";
+import {Search} from "../Common/Search/Search";
+import { Header } from '../Common/Header/Header';
 
 export type ToDoListType = {
     id: string
@@ -64,26 +66,34 @@ export const App = () => {
 
     return (
         <div className="App">
+            <Header/>
+            <div className="app-container">
+                <Search/>
+                <div className="app-content">
+                    <AddItemForm addItem={addTodolist} placeholder="Todolist title"/>
+                    <div className="app-todolists">
+                        {
+                            todolists.map(t => {
+                                const tasksForTodolist = tasks[t.id]
+                                return <ToDoList
+                                    key={t.id}
+                                    id={t.id}
+                                    title={t.title}
+                                    tasks={tasksForTodolist}
+                                    removeTask={removeTask}
+                                    addTask={addTask}
+                                    changeTasksStatus={changeTasksStatus}
+                                    removeTodolist={removeTodolist}
+                                    changeTaskTitle={changeTaskTitle}
+                                    changeTodolistTitle={changeTodolistTitle}
+                                />
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
             {status === "loading" && <Loading/>}
             {error && <div>{error}</div>}
-            <AddItemForm addItem={addTodolist}/>
-            {
-                todolists.map(t => {
-                    const tasksForTodolist = tasks[t.id]
-                    return <ToDoList
-                        key={t.id}
-                        id={t.id}
-                        title={t.title}
-                        tasks={tasksForTodolist}
-                        removeTask={removeTask}
-                        addTask={addTask}
-                        changeTasksStatus={changeTasksStatus}
-                        removeTodolist={removeTodolist}
-                        changeTaskTitle={changeTaskTitle}
-                        changeTodolistTitle={changeTodolistTitle}
-                    />
-                })
-            }
         </div>
     )
 }

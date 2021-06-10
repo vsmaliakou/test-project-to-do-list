@@ -1,6 +1,8 @@
 import React, {ChangeEvent, useState} from "react";
+import s from './EditableSpan.module.css'
 
 type EditableSpanPropsType = {
+    className: string
     title: string
     onChange: (newTitle: string) => void
 }
@@ -26,11 +28,12 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo((props) 
     return (
         editMode
             ? <input
+                className={s.input}
                 value={title}
                 autoFocus
                 onBlur={activateViewMode}
                 onChange={changeTitle}
             />
-            : <span onDoubleClick={activateEditMode}>{props.title}</span>
+            : <span className={props.className} onDoubleClick={activateEditMode}>{props.title}</span>
     )
 })

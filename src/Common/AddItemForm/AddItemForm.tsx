@@ -1,7 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import s from './AddItemForm.module.css'
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    placeholder: string
 }
 
 export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo((props) => {
@@ -32,15 +34,16 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = React.memo((props) =>
     }
 
     return (
-        <div>
+        <div className={s.addItemForm}>
             <input
                 value={taskTitle}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHandler}
                 className={error ? "error" : ""}
+                placeholder={props.placeholder}
             />
             <button onClick={addTask}>Add</button>
-            {error && <div className="error-message">{error}</div>}
+            {error && <div className={s.error}>{error}</div>}
         </div>
     )
 })
