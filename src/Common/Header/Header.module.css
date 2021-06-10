@@ -7,3 +7,9 @@
     font-size: 30px;
     font-weight: bold;
 }
+
+@media screen and (max-width: 630px) {
+    .header {
+        width: 100%;
+    }
+}

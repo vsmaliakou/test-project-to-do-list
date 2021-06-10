@@ -28,3 +28,9 @@
     top: 45px;
     color: red;
 }
+
+@media screen and (max-width: 651px) {
+    .addItemForm input {
+        width: 150px;
+    }
+}

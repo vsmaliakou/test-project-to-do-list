@@ -32,7 +32,7 @@ export const Search = () => {
 
                 <div style={{height: '450px', overflowY: "auto"}}>
                     {
-                        filteredTasks.map(ft => <div
+                        filteredTasks.map(ft => <div key={ft.id}
                             className={display ? `${s.search}` : `${s.searchNone}`}>{ft.title}</div>)
                     }
                 </div>

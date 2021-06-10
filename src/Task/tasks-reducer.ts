@@ -58,7 +58,7 @@ export const fetchTaskTC = (todolistId: string) => (dispatch: Dispatch) => {
             dispatch(setAppStatusAC({status: 'succeeded'}))
         })
         .catch(error => {
-            dispatch(setAppErrorAC(error.message))
+            dispatch(setAppErrorAC({error: error.message}))
             dispatch(setAppStatusAC({status: 'failed'}))
         })
 }
@@ -66,11 +66,16 @@ export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: D
     dispatch(setAppStatusAC({status: 'loading'}))
     tasksAPI.deleteTask(taskId, todolistId)
         .then(response => {
-            dispatch(removeTaskAC({taskId, todolistId}))
-            dispatch(setAppStatusAC({status: 'succeeded'}))
+            if (response.data.resultCode === 0) {
+                dispatch(removeTaskAC({taskId, todolistId}))
+                dispatch(setAppStatusAC({status: 'succeeded'}))
+            } else {
+                dispatch(setAppErrorAC({error: 'Some error occurred'}))
+                dispatch(setAppStatusAC({status: 'failed'}))
+            }
         })
         .catch(error => {
-            dispatch(setAppErrorAC(error.message))
+            dispatch(setAppErrorAC({error: error.message}))
             dispatch(setAppStatusAC({status: 'failed'}))
         })
 }
@@ -87,7 +92,7 @@ export const addTaskTC = (taskTitle: string, todolistId: string) => (dispatch: D
             }
         })
         .catch(error => {
-            dispatch(setAppErrorAC(error.message))
+            dispatch(setAppErrorAC({error: error.message}))
             dispatch(setAppStatusAC({status: 'failed'}))
         })
 }
@@ -119,7 +124,7 @@ export const updateTaskTC = (taskId: string, model: UpdateDomainTaskModelType, t
             }
         })
         .catch(error => {
-            dispatch(setAppErrorAC(error.message))
+            dispatch(setAppErrorAC({error: error.message}))
             dispatch(setAppStatusAC({status: 'failed'}))
         })
 }

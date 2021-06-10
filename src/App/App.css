@@ -1,6 +1,7 @@
 .App {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .app-container {
@@ -21,10 +22,27 @@
     flex-wrap: wrap;
 }
 
-.error {
-    border: red 1px solid;
+.app-error{
+    position: absolute;
+    top: 80px;
+    left: 600px;
+    background-color: red;
+    color: #fff;
+    padding: 10px;
 }
 
 .is-done {
     opacity: 0.5;
+}
+
+@media screen and (max-width: 630px) {
+    .app-container {
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 740px) {
+    .app-error {
+        top: 120px;
+        left: 20px;
+    }
 }

@@ -70,7 +70,7 @@ export const App = () => {
             <div className="app-container">
                 <Search/>
                 <div className="app-content">
-                    <AddItemForm addItem={addTodolist} placeholder="Todolist title"/>
+                    <AddItemForm addItem={addTodolist} placeholder="To-do list title"/>
                     <div className="app-todolists">
                         {
                             todolists.map(t => {
@@ -93,7 +93,7 @@ export const App = () => {
                 </div>
             </div>
             {status === "loading" && <Loading/>}
-            {error && <div>{error}</div>}
+            {error && <div className="app-error">{error}</div>}
         </div>
     )
 }
