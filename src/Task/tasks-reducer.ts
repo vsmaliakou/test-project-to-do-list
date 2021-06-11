@@ -1,7 +1,7 @@
 import {TasksStateType} from "../App/App";
 import {addTodolistAC, removeTodolistAC, setTodolistsAC} from "../Todolist/todolists-reducer";
 import {Dispatch} from "redux";
-import {tasksAPI, TaskType, UpdateTaskModelType} from "./task-api";
+import {TaskPriorities, tasksAPI, TaskStatuses, TaskType, UpdateTaskModelType} from "./task-api";
 import {AppRootStateType} from "../store";
 import {setAppErrorAC, setAppStatusAC} from "../App/app-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
@@ -109,7 +109,8 @@ export const updateTaskTC = (taskId: string, model: UpdateDomainTaskModelType, t
         status: task.status,
         priority: task.priority,
         startDate: task.startDate,
-        deadline: task.deadline
+        deadline: task.deadline,
+            ...model
     }
 
     dispatch(setAppStatusAC({status: 'loading'}))
@@ -132,8 +133,8 @@ export const updateTaskTC = (taskId: string, model: UpdateDomainTaskModelType, t
 export type UpdateDomainTaskModelType = {
     title?: string
     description?: string
-    status?: number
-    priority?: number
+    status?: TaskStatuses
+    priority?: TaskPriorities
     startDate?: string
     deadline?: string
 }

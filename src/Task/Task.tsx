@@ -11,10 +11,14 @@ type TaskPropsType = {
     changeTaskTitle: (taskId: string, title: string, todolistId: string) => void
 }
 
-export const Task: React.FC<TaskPropsType> = (props) => {
+export const Task: React.FC<TaskPropsType> = React.memo((props) => {
     const removeTask = () => props.removeTask(props.task.id, props.todolistId)
-    const changeTasksStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTasksStatus(props.task.id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New, props.todolistId)
-    const changeTaskTitle = useCallback((newTitle: string) => props.changeTaskTitle(props.task.id, newTitle, props.todolistId), [props.task.id, props.changeTaskTitle, props.todolistId])
+    const changeTasksStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        props.changeTasksStatus(props.task.id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New, props.todolistId)
+    }, [props.task.id, props.todolistId])
+    const changeTaskTitle = useCallback((newTitle: string) => {
+        props.changeTaskTitle(props.task.id, newTitle, props.todolistId)
+    }, [props.task.id, props.changeTaskTitle, props.todolistId])
 
     return <div className={props.task.status === TaskStatuses.Completed ? "is-done" : ""}>
         <div className={s.taskTitle}>
@@ -29,4 +33,4 @@ export const Task: React.FC<TaskPropsType> = (props) => {
             <button onClick={removeTask}>X</button>
         </div>
     </div>
-}
+})
