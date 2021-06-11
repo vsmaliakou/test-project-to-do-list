@@ -22,6 +22,17 @@ export const todolistsAPI = {
         return instance.put<ResponseType>(`todo-lists/${id}`, {title});
     }
 }
+export const authAPI = {
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post<ResponseType<{ userId: number }>>('auth/login', {email, password, rememberMe})
+    },
+    me() {
+        return instance.get<ResponseType<AuthMeResponseType>>('auth/me')
+    },
+    logout() {
+        return instance.delete<ResponseType>('auth/login')
+    },
+}
 
 export type TodolistType = {
     id: string
@@ -33,4 +44,9 @@ export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
     data: D
+}
+type AuthMeResponseType = {
+    id: number
+    email: string
+    login: string
 }

@@ -8,6 +8,20 @@
     font-weight: bold;
 }
 
+.header button{
+    background: #fff;
+    cursor: pointer;
+    padding: 10px 30px;
+    border: 1px solid #fff;
+    color: #131313;
+    font-size: 14px;
+    margin-left: 20px;
+}
+.header button:active{
+    background: #afafaf;
+    border: 1px solid #afafaf;
+}
+
 @media screen and (max-width: 630px) {
     .header {
         width: 100%;

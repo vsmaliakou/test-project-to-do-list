@@ -1,0 +1,27 @@
+.loginPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginPage input{
+    font-size: 14px;
+    color: #131313;
+    padding: 10px;
+    border: 1px solid #131313;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.loginPage button{
+    background: #131313;
+    cursor: pointer;
+    padding: 10px 30px;
+    border: 1px solid #131313;
+    color: #fff;
+    font-size: 14px;
+}
+.loginPage button:active{
+    background: #444444;
+    border: 1px solid #444444;
+}
